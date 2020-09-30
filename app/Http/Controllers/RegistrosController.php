@@ -14,7 +14,8 @@ class RegistrosController extends Controller
      */
     public function index()
     {
-        return view("welcome");
+        $datos= Registros::all();
+        return view("registros", compact("datos"));
     }
 
     /**
