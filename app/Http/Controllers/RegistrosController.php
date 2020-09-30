@@ -36,7 +36,13 @@ class RegistrosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $registros = new Registros ([
+            "nombre"=> $request->nombre,
+            "apellido"=> $request->apellido,
+            "nacimiento"=> $request->edad,
+            "direccion"=> $request->dom
+        ]);
+        $registros->save();
     }
 
     /**

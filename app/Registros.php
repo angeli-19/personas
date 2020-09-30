@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Registros extends Model
 {
     protected $table="registros";
+    protected $fillable=["nombre","apellido","nacimiento","direccion"];
 }
