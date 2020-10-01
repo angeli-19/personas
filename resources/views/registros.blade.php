@@ -1,9 +1,18 @@
 @extends("plantilla")
 @section("contenido")
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        @if(Session::get('success'))
+        <div class="alert alert-success">
+            <i class="fa fa-check"></i>{{Session::get('success')}}
+        </div>
+        @endif
+    </div>
+</div>
 <div>
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <button class='btn btn-warning' data-toggle='modal' data-target='#formNuevo' ><i class='fa fa-user-plus'></i> nuevo registro</button>
+            <button class='btn btn-info' data-toggle='modal' data-target='#formNuevo' ><i class='fa fa-user-plus'></i> nuevo registro</button>
         </div>
     </div>
 </div>
@@ -16,6 +25,7 @@
                     <th>Apellido</th>
                     <th>Fecha nacimiento</th>
                     <th>Direccion</th>
+                    <th colspan="2"></th>
                 </thead>
                 <tbody>
                     @if($datos)
@@ -25,6 +35,9 @@
                             <td>{{$val->apellido}}</td>
                             <td>{{$val->nacimiento}}</td>
                             <td>{{$val->direccion}}</td>
+                            <td><a class="btn-warning" href="{{route('home.edit',$val->id )}}" ><i class="fa fa-edit"></i></a></td>
+                            <td></td>
+                            
                         </tr>
   
                         @endforeach

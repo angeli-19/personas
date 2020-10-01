@@ -43,6 +43,7 @@ class RegistrosController extends Controller
             "direccion"=> $request->dom
         ]);
         $registros->save();
+        return redirect("/home")->with("success", "se ha guardado ". $request->nombre);
     }
 
     /**
