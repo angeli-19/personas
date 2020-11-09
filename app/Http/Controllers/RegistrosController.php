@@ -36,6 +36,25 @@ class RegistrosController extends Controller
      */
     public function store(Request $request)
     {
+        /*$rules=[
+            "nombre"=>"required|max:10",
+            "apellido"=>"required|max:20",
+            "dom"=>"required|numeric"
+        ];*/
+        //$validateData=$request ->validate($rules);
+        $request->validate([
+            "nombre"=>"required|max:10",
+            "apellido"=>"required|max:20",
+            "dom"=>"required|numeric"
+        ],
+        [
+            "nombre.requered"=>"el campo nombre esta vacio",
+            "nombre.max"=>"nombre sobrepasa el maximo de caracteres",
+            "apellido.requered"=>"el campo apellido esta vacio",
+            "apellido.max"=>"apellidos sobrepasa el maximo de caracteres",
+            "dom.numeric"=>"el domicilio es numerico"
+        ]
+                );
         $registros = new Registros ([
             "nombre"=> $request->nombre,
             "apellido"=> $request->apellido,
@@ -45,6 +64,7 @@ class RegistrosController extends Controller
         $registros->save();
         return redirect("/home")->with("success", "se ha guardado ". $request->nombre);
     }
+    
 
     /**
      * Display the specified resource.
@@ -75,9 +95,15 @@ class RegistrosController extends Controller
      * @param  \App\Registros  $registros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Registros $registros)
+    public function update(Request $request,$id)
     {
-        //
+            $registros = Registros::find($id);
+            $registros-> nombre = $request->enombre;
+            $registros-> apellido = $request->eapellido;
+            $registros-> nacimiento = $request->eedad;
+            $registros-> direccion = $request->edom;
+            $registros->save();
+            return redirect("/home")->with("success", "se ha actualizado la informacion". $request->enombre);
     }
 
     /**
@@ -86,8 +112,11 @@ class RegistrosController extends Controller
      * @param  \App\Registros  $registros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Registros $registros)
+    public function destroy($id)
     {
-        //
+        $registros = Registros::find($id);
+        $nombre=$registros->nombre." ".$registros->apellido;
+        $registros->delete();
+        return redirect("/home")->with("success", "se ha eliminado la informacion de ".$nombre);
     }
 }

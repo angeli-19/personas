@@ -37,9 +37,9 @@
             <table class="table-bordered">
                 <thead>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Fecha nacimiento</th>
-                    <th>Direccion</th>
+                    <th>Autor</th>
+                    <th>Genero</th>
+                    <th>Paginas</th>
                     <th colspan="2"></th>
                 </thead>
                 <tbody>
@@ -47,21 +47,21 @@
                         @foreach($datos as $val)
                         <tr>
                             <td>{{$val->nombre}}</td>
-                            <td>{{$val->apellido}}</td>
-                            <td>{{$val->nacimiento}}</td>
-                            <td>{{$val->direccion}}</td>
-                            <td><button class="btn-warning" data-toggle='modal' data-target='#formEditar'
+                            <td>{{$val->autor}}</td>
+                            <td>{{$val->genero}}</td>
+                            <td>{{$val->paginas}}</td>
+                          <td><button class="btn-warning" data-toggle='modal' data-target='#formEditar'
                                         onclick="mostrarDatos(this);"
                                         data-id="{{$val->id}}" data-nombre="{{$val->nombre}}" 
-                                        data-ap="{{$val->apellido}}" data-na="{{$val->nacimiento}}"
-                                        data-dir="{{$val->direccion}}">
+                                        data-ap="{{$val->autor}}" data-na="{{$val->genero}}"
+                                        data-dir="{{$val->paginas}}">
                                     
                                     <i class="fa fa-edit"></i>
                                     
                                 </button>
                             </td>
                             <td>
-                                <form method="POST" action="{{route('home.destroy',$val->id)}}">
+                                <form method="POST" action="{{route('libro.destroy',$val->id)}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="validar(this);" >
@@ -92,13 +92,13 @@
             </button>
           </div>
           <div class="modal-body">
-              <form method="POST" action="{{route('home.store')}}">     
+              <form method="POST" action="{{route('libro.store')}}">     
                   @csrf
             <div class="row">
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                              <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"></i></span>
                             </div>
                             <input required type="text" class="form-control" placeholder="Nombre" id="nombre" name="nombre">
                         </div>
@@ -106,17 +106,17 @@
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-users"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-file-alt"></i></span>
                             </div>
-                            <input required type="text" class="form-control" placeholder="Apellidos" id="apellido" name="apellido">
+                            <input required type="text" class="form-control" placeholder="Autor" id="autor" name="autor">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-birthday-cake"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-image"></i></span>
                             </div>
-                            <input required type="date" class="form-control" placeholder="Fecha" id="edad" name="edad">
+                            <input required type="text" class="form-control" placeholder="Genero" id="genero" name="genero">
                         </div>
                     </div>
                 </div>
@@ -124,9 +124,9 @@
                     <div class="col-md-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-wallet"></i></span>
                             </div>
-                            <textarea required id="dom" name="dom" class="form-control" rows="1" placeholder="Domicilio"></textarea>
+                            <input required type="text" class="form-control" placeholder="Paginas" id="paginas" name="paginas">
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                              <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"></i></span>
                             </div>
                             <input required type="text" class="form-control" placeholder="Nombre" id="enombre" name="enombre">
                         </div>
@@ -173,17 +173,17 @@
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-users"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-file-alt"></i></span>
                             </div>
-                            <input required type="text" class="form-control" placeholder="Apellidos" id="eapellido" name="eapellido">
+                            <input required type="text" class="form-control" placeholder="Autor" id="eapellido" name="eapellido">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-birthday-cake"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-image"></i></span>
                             </div>
-                            <input required type="date" class="form-control" placeholder="Fecha" id="eedad" name="eedad">
+                            <input required type="text" class="form-control" placeholder="Genero" id="eedad" name="eedad">
                         </div>
                     </div>
                 </div>
@@ -191,9 +191,9 @@
                     <div class="col-md-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-building"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-wallet"></i></span>
                             </div>
-                            <textarea required id="edom" name="edom" class="form-control" rows="1" placeholder="Domicilio"></textarea>
+                            <input required type="text" class="form-control" placeholder="Paginas" id="edom" name="edom">
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
         var ap =$(btn).attr("data-ap");
         var na =$(btn).attr("data-na");
         var dir =$(btn).attr("data-dir");
-        var url="{{route('home.update',0)}}";
+        var url="{{route('libro.update',0)}}";
         
         $("#enombre").val(nombre);
         $("#eapellido").val(ap);
@@ -231,7 +231,7 @@
         $("#edita").attr("action",url)
     }
     
-   function validar(btn){
+       function validar(btn){
         event.preventDefault(); //Evitar envío de formulario
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {

@@ -50,22 +50,43 @@ and open the template in the editor.
   </head>
   <body>
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <img src="img/perro.jpg" width="30" height="30" alt=""><a class="navbar-brand" href="#">Proyecto</a>
+      <img src="https://64.media.tumblr.com/9076efa9efc23f43d359c23765e66a59/47f5c2cb4bc74b36-f7/s640x960/d9d814640c2cb93517b044a053925167e48a3da6.jpg" width="40" height="40" alt=""><a class="navbar-brand" href="#">Proyecto</a>
     <button id="btnNavegacion" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="http://localhost/personas/public/home"> REGISTROS <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" onclick="cargarPagina('personas');">Personas</a>
+            <a class="nav-link" href="http://localhost/personas/public/productos" onclick="cargarPagina('personas');">PRODUCTOS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" onclick="cargarPagina('comentarios');">Comentarios</a>
+          <a class="nav-link" href="http://localhost/personas/public/libro" onclick="cargarPagina('comentarios');">LIBRO</a>
         </li>
       </ul>
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+            
+      </ul>
+        
     </div>
       </nav>
       <br><br><br>
